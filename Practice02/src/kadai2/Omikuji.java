@@ -1,6 +1,6 @@
 package kadai2;
 
-public abstract class Omikuji {
+public abstract class Omikuji implements Fortune{
 
 	protected String unsei;
 	protected String negaigoto;
@@ -8,14 +8,16 @@ public abstract class Omikuji {
 	protected String gakumon;
 
 	public abstract void setUnsei();
+	
+	public String disp() {
+		return null;
+		
+	}
 
 	public String getUnsei() {
 		return unsei;
 	}
 
-	public void setUnsei(String unsei) {
-		this.unsei = unsei;
-	}
 
 	public String getNegaigoto() {
 		return negaigoto;
