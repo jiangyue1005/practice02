@@ -10,7 +10,7 @@ public abstract class Omikuji implements Fortune{
 	public abstract void setUnsei();
 	
 	public String disp() {
-		return null;
+		return String.format(DISP_STR,getUnsei());
 		
 	}
 
