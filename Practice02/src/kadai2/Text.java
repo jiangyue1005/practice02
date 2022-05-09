@@ -19,13 +19,13 @@ public class Text {
 
 		File file1 = new File("/Users/y_jiang/Documents/unsei.csv");
 
-		FileReader fr1;
+		FileReader fr1 = null;
 
 		File file2 = new File("/Users/y_jiang/Documents/result.txt");
 
-		FileWriter fw;
+		FileWriter fw = null;
 
-		FileReader fr2;
+		FileReader fr2 = null;
 
 		List<Omikuji> list = new ArrayList<Omikuji>();
 		Omikuji omikuji = null;
@@ -70,7 +70,6 @@ public class Text {
 				list.add(omikuji);
 
 			}
-			fr1.close();
 
 			// ここは日付入力/////////////////////////////////////////////////////////////////////////////////
 			System.out.println("誕生日を入力してください。");
@@ -93,7 +92,7 @@ public class Text {
 			// fw1.write(sdf.format(d) + "," + key + ",");
 
 			String date2;
-			boolean resultFlg = true;
+			boolean resultFlg = false;
 			while ((date2 = on.readLine()) != null) {
 				String[] abb = date2.split(",");
 				String td = abb[0];
@@ -103,28 +102,31 @@ public class Text {
 					if (bd.equals(key)) {
 						String us = abb[2] + "," + abb[3] + "," + abb[4] + "," + abb[5];
 						System.out.println(us.replace(",", "\n"));
-						resultFlg = false;
+						resultFlg = true;
 					}
 				}
-
 			}
-			if (resultFlg) {
+			if (!resultFlg) {
 				Omikuji re = list.get(random.nextInt(list.size()));
 				String result = re.disp() + "," + re.getNegaigoto() + "," + re.getAkinai() + "," + re.getGakumon();
 				fw.write(sdf.format(d) + "," + key + "," + result + "\n");
 				System.out.println(result.replace(",", "\n"));
 			}
 
-			fw.close();
-			fr2.close();
-
-		} catch (
-
-		IOException e) {
+		} catch (IOException e) {
 			System.out.println("入力された日付は存在しません。");
 
 		} catch (ParseException e) {
 			System.out.println("入力された日付は存在しません。");
+		} finally {
+			try {
+				fr1.close();
+				fw.close();
+				fr2.close();
+			} catch (IOException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
 		}
 
 	}
